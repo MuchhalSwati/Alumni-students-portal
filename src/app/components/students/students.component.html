@@ -1,0 +1,46 @@
+<label for="universityid">UniversityId</label>
+<input type="text"  class="form-control" [(ngModel)]="universityId" id="universityid">
+<label for="studentid">StudentId</label>
+<input type="text" class="form-control" [(ngModel)]="studentId" id="studentid">
+<button type = "button" class="btn btn-primary" (click)="getStudentInfo()">search</button>
+
+  <div class='card'>
+  <div class='table-responsive'>
+  <table class = 'table table-striped' *ngIf="studentsCreditInfo.length">
+  <thead>
+  <tr>
+  <th>UnivId</th>
+  <th>UnivName</th>
+  <th>DeptId</th>
+  <th>DeptName</th>
+  <th>StudentId</th>
+  <th>FirstName</th>
+  <th>LastName</th>
+  <th>First</th>
+  <th>Second</th>
+  <th>Third</th>
+  <th>Fourth</th>
+  <th>Fifth</th>
+  <th>Award</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let student of studentsCreditInfo">
+  <td>{{student.univId}}</td>
+  <td>{{student.univName}}</td>
+  <td>{{student.departmentId}}</td>
+  <td>{{student.deptName}}</td>
+  <td>{{student.id}}</td>
+  <td>{{student.firstName}}</td>
+  <td>{{student.lastName}}</td>
+  <td>{{student.firstYear}}</td>
+  <td>{{student.secondYear}}</td>
+  <td>{{student.thirdYear}}</td>
+  <td>{{student.fourth}}</td>
+  <td>{{student.fifthYear}}</td>
+  <td>{{student.award}}</td>
+  </tr>
+  </tbody>
+  </table>
+  </div>
+  </div>
