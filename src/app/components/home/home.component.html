@@ -4,31 +4,31 @@
     <div>
     <label for="firstname">FirstName</label>
     <input type = "text" formControlName="firstName" title ="firstname" class="form-control"  ngModel>
-    <span style="color:red" *ngIf= "studentForm.get('firstName').invalid && studentForm.get('firstName').touched ">First Name field is invalid</span>
+    <span [ngStyle]="{'color': 'red'}" *ngIf= "studentForm.get('firstName').invalid && studentForm.get('firstName').touched ">First Name field is invalid</span>
     </div>
     <div>
     <label for="lastname">LastName</label>
     <input type = "text" formControlName="lastName" title ="lastName" class="form-control"   name = "LastName"  ngModel>
-    <span style="color:red" *ngIf= "studentForm.get('lastName').invalid && studentForm.get('lastName').touched">Last Name field is invalid</span>    
+    <span [ngStyle]="{'color': 'red'}"*ngIf= "studentForm.get('lastName').invalid && studentForm.get('lastName').touched">Last Name field is invalid</span>    
     </div>
 
     <div>
     <label for="startdate">StartDate</label>
     <input type = "date"  formControlName="startDate"  title = "startdate" class="form-control"   name = "StartDate"  ngModel>
-    <span style="color:red" *ngIf= "studentForm.get('startDate').invalid && studentForm.get('startDate').touched">Start date field is invalid</span>
-    <span style="color:red"*ngIf = isInvalidDateRange>Start Date is greater than end date</span>
+    <span [ngStyle]="{'color': 'red'}" *ngIf= "studentForm.get('startDate').invalid && studentForm.get('startDate').touched">Start date field is invalid</span>
+    <span [ngStyle]="{'color': 'red'}"*ngIf = isInvalidDateRange>Start Date is greater than end date</span>
     </div>
     
     <div>
     <label for="lastDate">EndDate</label>
     <input type = "date"  formControlName="lastDate"  title = "lastdate" class="form-control"  name = "LastDate" ngModel>
-    <span style="color:red" *ngIf= "studentForm.get('lastDate').invalid && studentForm.get('lastDate').touched">End date field is invalid</span>
+    <span [ngStyle]="{'color': 'red'}" *ngIf= "studentForm.get('lastDate').invalid && studentForm.get('lastDate').touched">End date field is invalid</span>
     </div>
 
     <div>
     <label for="deptid">DepartmentID</label>
     <input type = "text" formControlName ="departmentId"  title = "departmentId"class="form-control"  name = "DepartmentId" ngModel>
-    <span style="color:red" *ngIf= "studentForm.get('departmentId').invalid && studentForm.get('departmentId').touched">DeptId field is invalid</span>      
+    <span [ngStyle]="{'color': 'red'}" *ngIf= "studentForm.get('departmentId').invalid && studentForm.get('departmentId').touched">DeptId field is invalid</span>      
     </div>
     <button type="submit" [disabled] ="userlogin.invalid"  style="margin:5px;"  class="btn btn-primary">Submit</button>
     
