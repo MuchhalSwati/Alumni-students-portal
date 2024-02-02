@@ -12,7 +12,7 @@ export interface Student{
         firstYear: number,
         secondYear:number
         thirdYear:number,
-        fourth: number,
+        fourthYear: number,
         fifthYear: string,
         id: number,
         startDate: string,

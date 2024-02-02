@@ -27,18 +27,18 @@
   <tbody>
   <tr *ngFor="let student of studentsCreditInfo">
   <td>{{student.univId}}</td>
-  <td>{{student.univName}}</td>
+  <td>{{student.univName | uppercase}}</td>
   <td>{{student.departmentId}}</td>
-  <td>{{student.deptName}}</td>
+  <td>{{student.deptName | titlecase}}</td>
   <td>{{student.id}}</td>
-  <td>{{student.firstName}}</td>
-  <td>{{student.lastName}}</td>
+  <td>{{student.firstName | titlecase}}</td>
+  <td>{{student.lastName| titlecase}}</td>
   <td>{{student.firstYear}}</td>
   <td>{{student.secondYear}}</td>
   <td>{{student.thirdYear}}</td>
-  <td>{{student.fourth}}</td>
+  <td>{{student.fourthYear}}</td>
   <td>{{student.fifthYear}}</td>
-  <td>{{student.award}}</td>
+  <td>{{student.award | uppercase}}</td>
   </tr>
   </tbody>
   </table>

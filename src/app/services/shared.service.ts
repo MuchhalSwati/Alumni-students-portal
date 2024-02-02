@@ -11,7 +11,7 @@ import {StudentRecord} from '../interfaces/StudentRecord.model';
   providedIn: 'root'
 })
 export class SharedService {
-readonly APIUrl = "https://localhost:5001/student";
+readonly APIUrl = "https://localhost:44356/student";
   constructor(private http:HttpClient) { }
 
   getStudentCreditInfo(universityId:string,studentId:string):Observable<Student[]>{
