@@ -1,0 +1,43 @@
+<form [formGroup]="UpdateStudent" (ngSubmit)="UpdateData()">
+  <div class="mb-3">
+    <label class="form-label">DepartmentId</label>
+    <input type="text" class="form-control" formControlName="deptID">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">FirstName</label>
+    <input type="tetx" class="form-control" formControlName="firstName">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">LastName</label>
+    <input type="text" class="form-control" formControlName="lastName" >
+  </div>
+  <div class="mb-3">
+    <label class="form-label">StartDate</label>
+    <input type="text" class="form-control" formControlName="startDate">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">LastDate</label>
+    <input type="text" class="form-control" formControlName="lastDate">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">FirstYear</label>
+    <input type="text" class="form-control" formControlName="firstYear">
+  </div>
+  <div class="mb-3">
+    <label  class="form-label">SecondYear</label>
+    <input type="text" class="form-control" formControlName="secondYear">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">ThirdYear</label>
+    <input type="text" class="form-control" formControlName="thirdYear">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">FourthYear</label>
+    <input type="text" class="form-control" formControlName="fourthYear">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">FifthYear</label>
+    <input type="text" class="form-control" formControlName="fifthYear">
+  </div>
+  <button type="submit" class="btn btn-primary">Update</button>
+</form>

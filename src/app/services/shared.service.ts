@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, tap } from 'rxjs';
 import {Student} from '../interfaces/StudentInfo.model';
 import {Dept, StudDepartment} from '../interfaces/Department.model';
 import {StudentRecord} from '../interfaces/StudentRecord.model';
+import { UpdateRecord } from '../interfaces/UpdateStudentRecord';
 
 
 
@@ -25,4 +26,14 @@ readonly APIUrl = "https://localhost:44356/student";
    addStudentRecord(data:StudentRecord){
      return this.http.post<StudentRecord>(this.APIUrl + '/studentRecord', data)
    }
+
+   updateStudentRecord(universityId:string,studentId:string, data:UpdateRecord):Observable<any>{
+    const url = `${this.APIUrl}/StudentUpdate?univId=${universityId}&studentId=${studentId}`;
+  // Customize headers if needed
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    // Add any other headers here
+  });
+    return this.http.put<UpdateRecord>(this.APIUrl + '/StudentUpdate', data, {headers})
+  }
 }

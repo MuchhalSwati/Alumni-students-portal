@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { DepartmentComponent } from './components/department/department.component';
 import { HomeComponent } from './components/home/home.component';
 import { DatePipe } from '@angular/common';
+import { StudentsEditComponent } from './components/students/students-edit.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { DatePipe } from '@angular/common';
     StudentsComponent,
     DepartmentComponent,
     HomeComponent,
+    StudentsEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +29,7 @@ import { DatePipe } from '@angular/common';
       {path:'student', component:StudentsComponent},
       {path:'department', component:DepartmentComponent},
       {path:'home', component:HomeComponent},
+      {path:'students/edit/:univId/:id', component:StudentsEditComponent}
      
     ])
    

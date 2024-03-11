@@ -1,3 +1,32 @@
 h1{
     color: blue;
 }
+
+.container {
+    width: 100%; /* Adjust as needed */
+}
+
+.form-container {
+    float: left; /* Float the form controls to the left */
+    width: 50%;  /* Add some spacing between form controls and search results */
+}
+
+/* Search Results */
+.search-results {
+    float: left; 
+    width: 100%;  
+    /* Additional styling for search results (e.g., background color, padding, etc.) */
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ddd;
+} 
+
+.centered {
+    font-family: Arial, sans-serif;
+    /* font-size: 8px;
+    margin: 2px;
+    width: 35px;
+    height: 20px;
+    outline: dashed 1px black; */
+    text-align: center; /* Center horizontally */
+}
