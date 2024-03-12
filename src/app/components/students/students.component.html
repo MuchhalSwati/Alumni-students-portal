@@ -49,7 +49,7 @@
       <div class="row" *ngFor="let student of studentsCreditInfo">
           <div class="col-md-8">
               <!-- Display student information here -->
-              <p class="centered"><B>Full Name: {{student.firstName | titlecase}}</B></p>
+              <p class="centered"><B>Full Name: {{student.firstName | titlecase}}{{student.lastName | titlecase}}</B></p>
               <p><B>StudentId:</B>{{student.id}}</p>  
               <P><B>UniversityName:</B> {{student.univName}}</P>
               <p><B>UniversityId:</B> {{student.univId}}</p>

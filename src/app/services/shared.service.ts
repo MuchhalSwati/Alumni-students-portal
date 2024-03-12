@@ -27,7 +27,7 @@ readonly APIUrl = "https://localhost:44356/student";
      return this.http.post<StudentRecord>(this.APIUrl + '/studentRecord', data)
    }
 
-   updateStudentRecord(universityId:string,studentId:string, data:UpdateRecord):Observable<any>{
+   updateStudentRecord(universityId:string,studentId:string, data:UpdateRecord):Observable<UpdateRecord>{
     const url = `${this.APIUrl}/StudentUpdate?univId=${universityId}&studentId=${studentId}`;
   // Customize headers if needed
   const headers = new HttpHeaders({
