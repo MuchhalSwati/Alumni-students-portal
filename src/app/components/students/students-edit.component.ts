@@ -50,6 +50,8 @@ export class StudentsEditComponent implements OnInit {
         fourthYear: new FormControl(studentData.fourthYear),
         fifthYear: new FormControl(studentData.fifthYear)
       });
+
+      
       console.log(this.UpdateStudent.value);
       console.log('Form Controls Valid:', this.UpdateStudent.valid);
     } );
@@ -60,7 +62,7 @@ export class StudentsEditComponent implements OnInit {
 
   UpdateData(){
    this.service.updateStudentRecord(this.universityId, this.studentId, this.UpdateStudent.value).subscribe((result) => {
-  this.updateRecord = result;
+    this.updateRecord = result;
    })
   }
 
