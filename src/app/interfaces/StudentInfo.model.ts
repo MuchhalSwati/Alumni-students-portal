@@ -6,6 +6,7 @@ export interface Student{
         deptName: string,
         firstName: string,
         lastName:string,
+        contactInfoId:number,
         address: string,
         phoneNumber: number,
         email: string,
@@ -13,10 +14,10 @@ export interface Student{
         secondYear:number
         thirdYear:number,
         fourthYear: number,
-        fifthYear: string,
+        fifthYear: number,
         id: number,
-        startDate: string,
-        lastDate: string
+        startDate: Date,
+        lastDate: Date
     
     }
    

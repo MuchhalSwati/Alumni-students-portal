@@ -34,7 +34,7 @@ import { StudentsEditComponent } from './components/students/students-edit.compo
     ])
    
   ],
-  providers: [SharedService],
+  providers: [SharedService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
