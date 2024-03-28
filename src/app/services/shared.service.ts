@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, catchError, tap } from 'rxjs';
 import {Student} from '../interfaces/StudentInfo.model';
 import {Dept, StudDepartment} from '../interfaces/Department.model';
 import {StudentRecord} from '../interfaces/StudentRecord.model';
 import { UpdateRecord } from '../interfaces/UpdateStudentRecord';
+import { StudentUpdateInfo } from '../interfaces/StudentupdateInfo.model';
 
 
 
@@ -13,6 +14,8 @@ import { UpdateRecord } from '../interfaces/UpdateStudentRecord';
 })
 export class SharedService {
 readonly APIUrl = "https://localhost:44356/student";
+private studentInfoSubject = new BehaviorSubject<StudentUpdateInfo | null>(null);
+
   constructor(private http:HttpClient) { }
 
   getStudentCreditInfo(universityId:string,studentId:string):Observable<Student[]>{
@@ -28,12 +31,19 @@ readonly APIUrl = "https://localhost:44356/student";
    }
 
    updateStudentRecord(universityId:string,studentId:string, data:Partial<UpdateRecord>):Observable<UpdateRecord>{
-  //   const url = `${this.APIUrl}/StudentUpdate?univId=${universityId}&studentId=${studentId}`;
-  // // Customize headers if needed
-  // const headers = new HttpHeaders({
-  //   'Content-Type': 'application/json',
-  //   // Add any other headers here
-  // });
     return this.http.put<UpdateRecord>(this.APIUrl + '/' +universityId+ '/' + studentId+'/StudentUpdate', data)
+  }
+
+
+  updateStudentInfo(studentUpdateInfo:StudentUpdateInfo)
+  {
+    this.studentInfoSubject.next(studentUpdateInfo);
+    console.log('in update student function');
+  }
+
+  getStudentdata() {
+    console.log('in observable');
+    return this.studentInfoSubject.asObservable();
+    
   }
 }

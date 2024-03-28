@@ -65,7 +65,10 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+          <div *ngIf="updateSuccess">
+            <p style="color: green;">Student record updated successfully!</p>
+          </div>
+            <div *ngIf="studentRecord$ | async" class="col-md-6">
                 <!-- Student Information Form  -->
                  <h3>Student Information</h3> 
                 <form [formGroup]="UpdateStudent" (ngSubmit)="UpdateData()">
@@ -98,6 +101,7 @@
                 <input type="date" class="form-control" formControlName="lastDate">
                 <span *ngIf="lastDate.errors?.['required'] && lastDate.touched" style="color: red;">Please select LastDate</span>
                </div>
+               <p *ngIf="UpdateStudent.errors?.['dateValid'] && (startDate.touched || UpdateStudent.dirty)" style="color: red;"> please add valid start and Last date</p>
                <div class="mb-1">
                 <label class="form-label">Address</label>
                 <input type="text" class="form-control" formControlName="address">
@@ -110,6 +114,7 @@
                 <label class="form-label">PhoneNumber</label>
                 <input type="text" class="form-control" formControlName="phoneNumber">
                </div>
+               
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>

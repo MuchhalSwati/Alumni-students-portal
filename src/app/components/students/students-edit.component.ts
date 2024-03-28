@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnDestroy, OnInit } from '@angular/core';
 import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Student } from 'src/app/interfaces/StudentInfo.model';
@@ -7,19 +7,23 @@ import { UpdateRecord } from 'src/app/interfaces/UpdateStudentRecord';
 import { SharedService } from 'src/app/services/shared.service';
 import { DatePipe } from "@angular/common";
 import { dateValidator } from 'src/app/validators/date.validator';
+import { StudentUpdateInfo } from 'src/app/interfaces/StudentupdateInfo.model';
+import { Observable, observable, tap } from 'rxjs';
 
 @Component({
   selector: 'pm-students-edit-component',
   templateUrl: './students-edit.component.html',
   styleUrls: ['./students-edit.component.css']
 })
-export class StudentsEditComponent implements OnInit {
+export class StudentsEditComponent implements OnInit, OnDestroy{
 
   constructor(private service:SharedService, private router:ActivatedRoute, private route:Router, private datePipe:DatePipe ) { }
+  errorMessage:'';
   universityId:string = null;
   studentId:string = null;
-  studentRecord:Student[]=[];
+  studentRecord$:Observable<Student[]>;
   updateRecord:UpdateRecord;
+  updateSuccess=false;
   UpdateStudent = new FormGroup({
   departmentId:new FormControl(null,[Validators.required, Validators.maxLength(2)]
   ),
@@ -42,31 +46,26 @@ export class StudentsEditComponent implements OnInit {
   ngOnInit(): void {
     this.universityId = this.router.snapshot.paramMap.get('univId');
     this.studentId = this.router.snapshot.paramMap.get('id');
-    this.service.getStudentCreditInfo(this.universityId, this.studentId).subscribe((result) =>{
-      this.studentRecord = result;
-      console.log(this.studentRecord);
-      const studentData = this.studentRecord[0]
-        this.UpdateStudent.controls.departmentId.setValue(studentData.departmentId),
-        this.UpdateStudent.controls.firstName.setValue(studentData.firstName),
-        this.UpdateStudent.controls.lastName.setValue(studentData.lastName),
-        this.UpdateStudent.controls.startDate.setValue(this.datePipe.transform(studentData.startDate, "yyyy-MM-dd")),
-        this.UpdateStudent.controls.lastDate.setValue(this.datePipe.transform(studentData.lastDate, "yyyy-MM-dd")),
-        this.UpdateStudent.controls.contactInfoId.setValue(studentData.contactInfoId),
-        this.UpdateStudent.controls.address.setValue(studentData.address),
-        this.UpdateStudent.controls.email.setValue(studentData.email),
-        this.UpdateStudent.controls.phoneNumber.setValue(studentData.phoneNumber),
-        this.UpdateStudent.controls.firstYear.setValue(studentData.firstYear),
-        this.UpdateStudent.controls.secondYear.setValue(studentData.secondYear),
-        this.UpdateStudent.controls.thirdYear.setValue(studentData.thirdYear),
-        this.UpdateStudent.controls.fourthYear.setValue(studentData.fourthYear),
-        this.UpdateStudent.controls.fifthYear.setValue(studentData.fifthYear)
-      console.log('FormControl values',this.UpdateStudent.value);
-      console.log('Form Controls Valid:', this.UpdateStudent.valid);
-      
-    } );
-
-    console.log('First Name Control:', this.UpdateStudent.get('firstName'))
-   
+    this.studentRecord$ = this.service.getStudentCreditInfo(this.universityId, this.studentId).pipe(
+      tap((post => {
+       this.UpdateStudent.controls.departmentId.setValue(post[0].departmentId),
+       this.UpdateStudent.controls.firstName.setValue(post[0].firstName),
+       this.UpdateStudent.controls.lastName.setValue(post[0].lastName),
+       this.UpdateStudent.controls.startDate.setValue(this.datePipe.transform(post[0].startDate, "yyyy-MM-dd")),
+        this.UpdateStudent.controls.lastDate.setValue(this.datePipe.transform(post[0].lastDate, "yyyy-MM-dd")),
+        this.UpdateStudent.controls.contactInfoId.setValue(post[0].contactInfoId),
+        this.UpdateStudent.controls.address.setValue(post[0].address),
+        this.UpdateStudent.controls.email.setValue(post[0].email),
+        this.UpdateStudent.controls.phoneNumber.setValue(post[0].phoneNumber),
+        this.UpdateStudent.controls.firstYear.setValue(post[0].firstYear),
+        this.UpdateStudent.controls.secondYear.setValue(post[0].secondYear),
+        this.UpdateStudent.controls.thirdYear.setValue(post[0].thirdYear),
+        this.UpdateStudent.controls.fourthYear.setValue(post[0].fourthYear),
+        this.UpdateStudent.controls.fifthYear.setValue(post[0].fifthYear)
+       console.log(post);
+      }))
+    );
+            
   }
 
   get departmentId()
@@ -93,10 +92,60 @@ export class StudentsEditComponent implements OnInit {
     return this.UpdateStudent.controls.lastDate;
   }
 
-  UpdateData(){
-   this.service.updateStudentRecord(this.universityId, this.studentId, this.UpdateStudent.value).subscribe({
-    next: ()=> this.route.navigate(['/student'])
-    });
+  get email()
+  {
+    return this.UpdateStudent.controls.lastDate;
   }
 
+  
+
+  UpdateData(){
+  this.service.updateStudentRecord(this.universityId, this.studentId, this.UpdateStudent.value).subscribe((updateStudent)=>{
+    console.log('updated student successfully');
+    this.updateSuccess = true;
+    if(this.updateSuccess)
+    {
+    this.service.updateStudentInfo(updateStudentInfo);
+    this.route.navigate(['/student']);
+    }
+    (error)=>this.errorMessage = error
+     }
+    );
+    
+    const updateStudentInfo:StudentUpdateInfo= {
+      universityid: this.universityId,
+      studentId: this.studentId
+    };
+
+   
+    // next: response => this.updateRecord = response,
+    // error: err => this.errorMessage = err
+   
+    // console.log('student record updated successfully')
+    // console.log('status code:', response)
+    // this.route.navigate(['/student']);
+   
+    // (error) =>{
+    //   console.error('Error updating student record:', error)
+    // });
+  
+
+ 
+
+  // if(this.updateSuccess)
+  // {
+  // this.service.updateStudentIfo(updateStudentInfo);
+  // this.route.navigate(['/student']);
+  // }
+  
+  
+
+}
+
+ngOnDestroy(): void {
+ // this.service.updateStudentInfo(null)
+  }
+
+
+  
 }

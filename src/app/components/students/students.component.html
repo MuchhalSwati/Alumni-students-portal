@@ -32,7 +32,7 @@
 
 
 <div class="container">
-  <!-- Form Controls -->
+  <!-- Form Controls  -->
   <div class="form-controls">
       <label for="universityid">UniversityId</label>
       <input type="text"  class="form-control" [(ngModel)]="universityId" id="universityid">
@@ -42,20 +42,21 @@
       <button type="button" class="btn btn-primary" (click)="getStudentInfo()">Search</button>
       
   </div>
-  <br>
+  <br> 
 
-  <!-- Search Results -->
+   <!-- Search Results  -->
   <div class="search-results" *ngIf="studentsCreditInfo.length">
       <div class="row" *ngFor="let student of studentsCreditInfo">
           <div class="col-md-8">
-              <!-- Display student information here -->
-              <p class="centered"><B>Full Name: {{student.firstName | titlecase}}{{student.lastName | titlecase}}</B></p>
+               <!-- Display student information here -->
+               <p class="centered"><B>Full Name: {{student.firstName | titlecase}} {{student.lastName | titlecase}}</B></p>
               <p><B>StudentId:</B>{{student.id}}</p>  
               <P><B>UniversityName:</B> {{student.univName}}</P>
-              <p><B>UniversityId:</B> {{student.univId}}</p>
-              <p><B>DepartmentId:</B>{{student.departmentId}}</p>
               <p><B>DepartmentName:</B> {{student.deptName}}</p>
-              <p><B>FirstYear</B>{{student.firstYear}}</p>
+              <p><B>Address:</B> {{student.address}}</p>
+              <p><B>Email:</B> {{student.email}}</p>
+              <p><B>Phone Number:</B>{{student.phoneNumber}}</p>
+              <p><B>FirstYear:</B>{{student.firstYear}}</p>
               <p><B>SecondYear:</B> {{student.secondYear}}</p>
               <p><B>ThirdYear:</B> {{student.thirdYear}}</p>
               <p><B>Fourth:</B> {{student.fourthYear}}</p>
@@ -65,9 +66,9 @@
               <button type="button" class="btn btn-primary" style="background-color: red; border-color: red;">Delete</button>
           </div>
       </div>
-  </div>
-</div>
-
+  </div> 
+   </div> 
+ 
 
 
 
@@ -85,34 +86,33 @@
   <th>UnivId</th>
   <th>UnivName</th>
   <th>DeptId</th>
-  <th>DeptName</th> -->
-  <!-- <th>StudentId</th>
+  <th>DeptName</th> 
+  <th>StudentId</th>
   <th>FirstName</th>
-  <th>LastName</th> -->
-  <!-- <th>First</th>
+  <th>LastName</th> 
+  <th>First</th>
   <th>Second</th>
   <th>Third</th>
   <th>Fourth</th>
   <th>Fifth</th>
-  <th>Award</th> -->
-  <!-- </tr>
+  <th>Award</th>
+  </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let student of studentsCreditInfo"> -->
-  <!-- <td>{{student.univId}}</td>
+  <tr *ngFor="let student of studentsCreditInfo"> 
+<td>{{student.univId}}</td>
   <td>{{student.univName | uppercase}}</td>
   <td>{{student.departmentId}}</td>
-  <td>{{student.deptName | titlecase}}</td> -->
-  <!-- <td>{{student.id}}</td>
+  <td>{{student.deptName | titlecase}}</td> 
+  <td>{{student.id}}</td>
   <td>{{student.firstName | titlecase}}</td>
-  <td>{{student.lastName| titlecase}}</td> -->
-  <!-- <td>{{student.firstYear}}</td>
+  <td>{{student.lastName| titlecase}}</td> 
+  <td>{{student.firstYear}}</td>
   <td>{{student.secondYear}}</td>
   <td>{{student.thirdYear}}</td>
   <td>{{student.fourthYear}}</td>
   <td>{{student.fifthYear}}</td>
-  <td>{{student.award | uppercase}}</td> -->
-  <!-- <td>
+  <td>{{student.award | uppercase}}</td> 
   <button type = "button" class="btn btn-primary">View</button>
   </td>
   <td>
@@ -122,4 +122,4 @@
   </tbody>
   </table>
   </div>
-  </div> --> 
+  </div> -->

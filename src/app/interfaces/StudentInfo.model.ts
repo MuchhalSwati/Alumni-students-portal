@@ -10,6 +10,7 @@ export interface Student{
         address: string,
         phoneNumber: number,
         email: string,
+        creditScoreId:number,
         firstYear: number,
         secondYear:number
         thirdYear:number,

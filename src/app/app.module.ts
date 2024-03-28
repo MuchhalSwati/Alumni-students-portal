@@ -6,11 +6,12 @@ import { StudentsComponent } from './components/students/students.component';
 import {HttpClientModule} from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { SharedService } from './services/shared.service';
-import { RouterModule } from '@angular/router';
+import { ROUTES, RouterModule } from '@angular/router';
 import { DepartmentComponent } from './components/department/department.component';
 import { HomeComponent } from './components/home/home.component';
 import { DatePipe } from '@angular/common';
 import { StudentsEditComponent } from './components/students/students-edit.component';
+
 
 @NgModule({
   declarations: [
@@ -26,10 +27,11 @@ import { StudentsEditComponent } from './components/students/students-edit.compo
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
+      {path:'students/edit/:univId/:id', component:StudentsEditComponent},
       {path:'student', component:StudentsComponent},
       {path:'department', component:DepartmentComponent},
       {path:'home', component:HomeComponent},
-      {path:'students/edit/:univId/:id', component:StudentsEditComponent}
+      
      
     ])
    
