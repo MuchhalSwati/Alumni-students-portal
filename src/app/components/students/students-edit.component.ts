@@ -33,7 +33,6 @@ export class StudentsEditComponent implements OnInit, OnDestroy{
     Validators.minLength(2)]),
   startDate: new FormControl(null,Validators.required),
   lastDate: new FormControl(null,Validators.required),
-  contactInfoId: new FormControl(null,Validators.required),
   address:new FormControl(null),
   email:new FormControl(null),
   phoneNumber:new FormControl(null),
@@ -53,7 +52,6 @@ export class StudentsEditComponent implements OnInit, OnDestroy{
        this.UpdateStudent.controls.lastName.setValue(post[0].lastName),
        this.UpdateStudent.controls.startDate.setValue(this.datePipe.transform(post[0].startDate, "yyyy-MM-dd")),
         this.UpdateStudent.controls.lastDate.setValue(this.datePipe.transform(post[0].lastDate, "yyyy-MM-dd")),
-        this.UpdateStudent.controls.contactInfoId.setValue(post[0].contactInfoId),
         this.UpdateStudent.controls.address.setValue(post[0].address),
         this.UpdateStudent.controls.email.setValue(post[0].email),
         this.UpdateStudent.controls.phoneNumber.setValue(post[0].phoneNumber),
@@ -94,7 +92,7 @@ export class StudentsEditComponent implements OnInit, OnDestroy{
 
   get email()
   {
-    return this.UpdateStudent.controls.lastDate;
+    return this.UpdateStudent.controls.email;
   }
 
   

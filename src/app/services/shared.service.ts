@@ -27,6 +27,7 @@ private studentInfoSubject = new BehaviorSubject<StudentUpdateInfo | null>(null)
   }
   
    addStudentRecord(data:StudentRecord){
+    console.log(`in student srevice`);
      return this.http.post<StudentRecord>(this.APIUrl + '/studentRecord', data)
    }
 

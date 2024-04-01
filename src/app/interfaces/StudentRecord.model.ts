@@ -4,5 +4,13 @@ export interface StudentRecord{
     lastName:string,
     startDate: string,
     lastDate: string,
-    departmentId:number
+    departmentId:number,
+    address:string,
+    email:string,
+    phoneNumber:number,
+    firstYear:number,
+    secondYear:number,
+    thirdYear:number,
+    fourthYear:number,
+    fifthYear:number
 }
