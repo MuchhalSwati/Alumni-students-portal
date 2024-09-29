@@ -45,6 +45,7 @@
        <div class="mb-1">
         <label class="form-label">Email</label>
         <input type="text" class="form-control" formControlName="email">
+        <span *ngIf="email.errors?.['invalid'] && email.touched" style="color: red;">please enter valid email</span>
         {{studentForm.controls['email'].valid}} 
        </div>
        <div class="mb-1">

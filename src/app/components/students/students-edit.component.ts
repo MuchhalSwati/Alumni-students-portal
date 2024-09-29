@@ -9,6 +9,7 @@ import { DatePipe } from "@angular/common";
 import { dateValidator } from 'src/app/validators/date.validator';
 import { StudentUpdateInfo } from 'src/app/interfaces/StudentupdateInfo.model';
 import { Observable, observable, tap } from 'rxjs';
+import { AlertifyService } from 'src/app/services/Alertify.service';
 
 @Component({
   selector: 'pm-students-edit-component',
@@ -17,7 +18,7 @@ import { Observable, observable, tap } from 'rxjs';
 })
 export class StudentsEditComponent implements OnInit, OnDestroy{
 
-  constructor(private service:SharedService, private router:ActivatedRoute, private route:Router, private datePipe:DatePipe ) { }
+  constructor(private service:SharedService, private router:ActivatedRoute, private route:Router, private datePipe:DatePipe, private alertify:AlertifyService) { }
   errorMessage:'';
   universityId:string = null;
   studentId:string = null;
@@ -116,32 +117,13 @@ export class StudentsEditComponent implements OnInit, OnDestroy{
     };
 
    
-    // next: response => this.updateRecord = response,
-    // error: err => this.errorMessage = err
    
-    // console.log('student record updated successfully')
-    // console.log('status code:', response)
-    // this.route.navigate(['/student']);
-   
-    // (error) =>{
-    //   console.error('Error updating student record:', error)
-    // });
-  
-
- 
-
-  // if(this.updateSuccess)
-  // {
-  // this.service.updateStudentIfo(updateStudentInfo);
-  // this.route.navigate(['/student']);
-  // }
-  
   
 
 }
 
 ngOnDestroy(): void {
- // this.service.updateStudentInfo(null)
+ 
   }
 
 

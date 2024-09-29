@@ -32,7 +32,7 @@ private studentInfoSubject = new BehaviorSubject<StudentUpdateInfo | null>(null)
    }
 
    updateStudentRecord(universityId:string,studentId:string, data:Partial<UpdateRecord>):Observable<UpdateRecord>{
-    return this.http.put<UpdateRecord>(this.APIUrl + '/' +universityId+ '/' + studentId+'/StudentUpdate', data)
+    return this.http.put<UpdateRecord>(this.APIUrl + '/' +universityId+ '/' +studentId+'/StudentUpdate', data)
   }
 
 
@@ -46,5 +46,12 @@ private studentInfoSubject = new BehaviorSubject<StudentUpdateInfo | null>(null)
     console.log('in observable');
     return this.studentInfoSubject.asObservable();
     
+  }
+
+  deleteStudentRecord(universityId:number, studentId: number)
+  {
+    //https://localhost:44356/Student/1/1010/StudentDelete
+    console.log(`in shared service delete student record function ${universityId}, ${studentId}`)
+     return this.http.delete(this.APIUrl + '/' +universityId+ '/' +studentId+'/StudentDelete');
   }
 }

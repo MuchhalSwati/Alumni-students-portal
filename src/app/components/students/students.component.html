@@ -45,7 +45,8 @@
   <br> 
 
    <!-- Search Results  -->
-  <div class="search-results" *ngIf="studentsCreditInfo.length">
+  <ng-container *ngIf="$studentCreditData | async as studentsCreditInfo ">
+  <div class="search-results" >
       <div class="row" *ngFor="let student of studentsCreditInfo">
           <div class="col-md-8">
                <!-- Display student information here -->
@@ -63,11 +64,13 @@
               <p><B>Fifth:</B> {{student.fifthYear}}</p>
               <p><B>Award:</B> {{student.award | uppercase}}</p>
               <a [routerLink]="['/students/edit', student.univId,student.id]" style="margin-right: 10px;" class="btn btn-primary">Edit</a>
-              <button type="button" class="btn btn-primary" style="background-color: red; border-color: red;">Delete</button>
+              <button type="button" class="btn btn-primary" style="background-color: red; border-color: red;" (click)="deleteStudentRecord(student.univId,student.id)">Delete</button>
           </div>
       </div>
   </div> 
+</ng-container>
    </div> 
+ 
  
 
 

@@ -1,9 +1,10 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { ActivatedRoute,Router } from '@angular/router';
 import { SharedService } from '../../services/shared.service';
 import {Student} from '../../interfaces/StudentInfo.model';
-import { Subject, Subscription, Unsubscribable, delay, filter, takeUntil } from 'rxjs';
+import { Observable,of,Subscription} from 'rxjs';
+import { AlertifyService } from 'src/app/services/Alertify.service';
 
 
 @Component({
@@ -20,30 +21,13 @@ export class StudentsComponent implements OnInit, OnDestroy {
   studentsCreditInfo:Student[] = [];
   //detailView:Student[]=[];
   view:boolean = false;
-  //private destroy$ = new Subject<void>();
-
-
-  constructor(private service: SharedService, private route: ActivatedRoute,private router:Router) {  
-   
-  }
+  $studentCreditData: Observable<Student[]>
+  
+  constructor(private service: SharedService, private route: ActivatedRoute,private router:Router, private alertify:AlertifyService) {  }
 
   ngOnInit(): void 
   {  
-    //  this.router.events
-    // .pipe(
-    //   filter(event => (event instanceof NavigationEnd)))
-    //   .subscribe((event:NavigationEnd) =>{
-    //     const editRoutePattern = '/students/edit/';
-    //     if(event.url.includes(editRoutePattern))
-    //     {
-    //       console.log(` URL after redirect${event.url}`);
-    //       this.callfunction();
-    //     }
-    //     else{
-    //       console.log(`not redirected from student update component ${event}`)
-    //     }
-    //   })
-
+    
    this.student_subscription();
    
   }
@@ -65,27 +49,32 @@ export class StudentsComponent implements OnInit, OnDestroy {
      });
   }
 
-  getStudentInfo():void {
-  this.service.getStudentCreditInfo(this.universityId, this.studentId).subscribe((data) => {
-      this.studentsCreditInfo = data;
-      console.log(this.studentsCreditInfo);
-      console.log(`In getstudentInfo:${this.studentId}`)
-      console.log(`In getstudentInfo${this.universityId}`)
-    })
+  getStudentInfo():void
+  {
+  this.$studentCreditData = this.service.getStudentCreditInfo(this.universityId, this.studentId)
   }
 
-  // viewDetail():void{
-  //   //this.detailView = this.studentsCreditInfo;
-  //   this.view = !this.view
-  // }
+  deleteStudentRecord(universityId:number, studentId:number):void
+  {
+    console.log(`In delete function universityId ${universityId} studentId ${studentId}`)
+    this.service.deleteStudentRecord(universityId, studentId).subscribe(
+      {
+        next:(response)=> this.resetForm(),
+        complete:() => this.alertify.success('Successfully deleted student record')
+      }
+    )
+  }
+
+  resetForm(): void {
+    this.universityId = '';
+    this.studentId = '';
+    this.studentsCreditInfo = [];
+    this.$studentCreditData = of([]);
+  }
+
+  
 
   ngOnDestroy(): void {
-    // if (this.subscription) {
-    //   this.subscription.unsubscribe();
-    //   console.log(`StudentId:${this.studentId}` )
-    //   console.log(`UniversityId:${this.universityId}`)
-    // this.destroy$.next();
-    // this.destroy$.complete();
     this.service.updateStudentInfo(null)
     }
   }

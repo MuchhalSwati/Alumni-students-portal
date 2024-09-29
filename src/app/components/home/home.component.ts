@@ -6,6 +6,9 @@ import {StudentRecord} from '../../interfaces/StudentRecord.model'
 import { combineLatest } from 'rxjs';
 import { ConditionalExpr } from '@angular/compiler';
 import { dateValidator } from 'src/app/validators/date.validator';
+import { HttpErrorResponse } from '@angular/common/http';
+import { AlertifyService } from 'src/app/services/Alertify.service';
+
 @Component({
   selector: 'pm-home',
   templateUrl: './home.component.html',
@@ -16,7 +19,7 @@ export class HomeComponent implements OnInit {
  isInvalidDateRange:boolean=false;
  
 
-constructor(private service:SharedService) {  }
+constructor(private service:SharedService, private alertify:AlertifyService) {  }
  
 
   ngOnInit(): void {
@@ -41,7 +44,7 @@ constructor(private service:SharedService) {  }
       lastDate: new FormControl('',Validators.required),
       departmentId: new FormControl('',[Validators.required,Validators.maxLength(2), Validators.pattern("^[0-9]*$")]),
       address:new FormControl(null),
-      email:new FormControl(null),
+      email:new FormControl(null,[Validators.email]),
       phoneNumber:new FormControl(null),
       firstYear: new FormControl(null),
       secondYear: new FormControl(null),
@@ -73,9 +76,9 @@ constructor(private service:SharedService) {  }
 
     const model = this.getModel();
     this.service.addStudentRecord(model).subscribe({
-      next:(item) => alert("Successfully added student record:  " + item.id+ " firstName: " + item.firstName  + "LastName:  " +item.lastName),
-      error:(err) => alert(`Failed to add student record ${err}`),
-      complete: () => console.log('complete')
+      next:(item) => this.onReset(),
+      //error:(err:HttpErrorResponse) => alert(err.message),
+      complete: () => this.alertify.success('Successfully added student record')
     })
   
 
