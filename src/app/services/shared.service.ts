@@ -14,7 +14,7 @@ import { StudentUpdateInfo } from '../interfaces/StudentupdateInfo.model';
 })
 export class SharedService {
 readonly APIUrl = "https://localhost:44356/student";
-private studentInfoSubject = new BehaviorSubject<StudentUpdateInfo | null>(null);
+public studentInfoSubject$ = new BehaviorSubject<StudentUpdateInfo | null>(null);
 
   constructor(private http:HttpClient) { }
 
@@ -38,15 +38,15 @@ private studentInfoSubject = new BehaviorSubject<StudentUpdateInfo | null>(null)
 
   updateStudentInfo(studentUpdateInfo:StudentUpdateInfo)
   {
-    this.studentInfoSubject.next(studentUpdateInfo);
+    this.studentInfoSubject$.next(studentUpdateInfo);
     console.log('in update student function');
   }
 
-  getStudentdata() {
-    console.log('in observable');
-    return this.studentInfoSubject.asObservable();
+  // getStudentdata() {
+  //   console.log('in observable');
+  //   return this.studentInfoSubject.asObservable();
     
-  }
+  // }
 
   deleteStudentRecord(universityId:number, studentId: number)
   {

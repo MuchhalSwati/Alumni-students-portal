@@ -11,8 +11,8 @@ export class HttpErrorInterceptorService implements HttpInterceptor{
     return next.handle(req).pipe(
       catchError((error:HttpErrorResponse)=>{
         const errorMessage = this.setError(error)
-      console.log(error);
-      this.alertify.error(error.message);
+      console.log(`Error from constant ${JSON.stringify(errorMessage)}`);
+      this.alertify.error(errorMessage);
      return throwError(() => new Error(error.message));
       })
     );
@@ -27,9 +27,22 @@ setError(error: HttpErrorResponse):string{
      errorMessage = error.error.message;
   }
   else{
-    if(error.status !==0)
+
+    switch(error.status)
     {
-      errorMessage = error.error;
+      case 400:
+        errorMessage = 'Bad Request: The request cannot be understood'
+        break;
+
+      case 404:
+        errorMessage = 'Not found: The requested resource could not be found.'
+        break;
+
+      case 500:
+        errorMessage = 'Internal server error'
+        break;
+      default:
+        errorMessage = 'unexpected error'
     }
   }
 

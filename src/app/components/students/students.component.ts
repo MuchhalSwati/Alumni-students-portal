@@ -34,7 +34,7 @@ export class StudentsComponent implements OnInit, OnDestroy {
 
   student_subscription()
   {
-    this.subscription = this.service.getStudentdata().subscribe((info) =>{
+    this.subscription = this.service.studentInfoSubject$.subscribe((info) =>{
       if(info)
       {
         this.studentId = info.studentId,

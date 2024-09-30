@@ -46,8 +46,7 @@
 
    <!-- Search Results  -->
   <ng-container *ngIf="$studentCreditData | async as studentsCreditInfo ">
-  <div class="search-results" >
-      <div class="row" *ngFor="let student of studentsCreditInfo">
+      <div class="row search-results" *ngFor="let student of studentsCreditInfo">
           <div class="col-md-8">
                <!-- Display student information here -->
                <p class="centered"><B>Full Name: {{student.firstName | titlecase}} {{student.lastName | titlecase}}</B></p>
@@ -67,8 +66,7 @@
               <button type="button" class="btn btn-primary" style="background-color: red; border-color: red;" (click)="deleteStudentRecord(student.univId,student.id)">Delete</button>
           </div>
       </div>
-  </div> 
-</ng-container>
+  </ng-container>
    </div> 
  
  
