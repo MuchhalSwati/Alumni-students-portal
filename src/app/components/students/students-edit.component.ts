@@ -116,10 +116,6 @@ export class StudentsEditComponent implements OnInit, OnDestroy{
       studentId: this.studentId
     };
 
-   
-   
-  
-
 }
 
 ngOnDestroy(): void {

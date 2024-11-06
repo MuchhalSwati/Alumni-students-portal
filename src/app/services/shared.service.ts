@@ -26,9 +26,9 @@ public studentInfoSubject$ = new BehaviorSubject<StudentUpdateInfo | null>(null)
     return this.http.get<Dept>(this.APIUrl+'/'+universityId+'/'+ departmentId+'/department')
   }
   
-   addStudentRecord(data:StudentRecord){
+   addStudentRecord(data:StudentRecord):Observable<{ studentId: number }>{
     console.log(`in student srevice`);
-     return this.http.post<StudentRecord>(this.APIUrl + '/studentRecord', data)
+     return this.http.post<{studentId: number}>(this.APIUrl + '/studentRecord', data)
    }
 
    updateStudentRecord(universityId:string,studentId:string, data:Partial<UpdateRecord>):Observable<UpdateRecord>{

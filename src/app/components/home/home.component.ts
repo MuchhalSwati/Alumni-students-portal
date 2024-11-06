@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SharedService } from 'src/app/services/shared.service';
 import {StudentRecord} from '../../interfaces/StudentRecord.model'
-import { combineLatest } from 'rxjs';
-import { ConditionalExpr } from '@angular/compiler';
 import { dateValidator } from 'src/app/validators/date.validator';
-import { HttpErrorResponse } from '@angular/common/http';
 import { AlertifyService } from 'src/app/services/Alertify.service';
 
 @Component({
@@ -17,6 +13,7 @@ import { AlertifyService } from 'src/app/services/Alertify.service';
 export class HomeComponent implements OnInit {
  studentForm!: FormGroup;
  isInvalidDateRange:boolean=false;
+ studentId:number;
  
 
 constructor(private service:SharedService, private alertify:AlertifyService) {  }
@@ -24,15 +21,6 @@ constructor(private service:SharedService, private alertify:AlertifyService) {  
 
   ngOnInit(): void {
     this.studentForm = this.buildForm();
-    // = new FormGroup({
-    //   firstName: new FormControl('',[Validators.required,Validators.maxLength(15) ,Validators.minLength(5)]),
-    //   lastName: new FormControl('',[Validators.required,Validators.maxLength(15) ,Validators.minLength(3)]),
-    //   startDate: new FormControl('',Validators.required),
-    //   lastDate: new FormControl('',Validators.required),
-    //   departmentId: new FormControl('',[Validators.required,Validators.maxLength(2), Validators.pattern("^[0-9]*$")])
-      
-      
-    // });
   }
 
 
@@ -46,43 +34,28 @@ constructor(private service:SharedService, private alertify:AlertifyService) {  
       address:new FormControl(null),
       email:new FormControl(null,[Validators.email]),
       phoneNumber:new FormControl(null),
-      firstYear: new FormControl(null),
-      secondYear: new FormControl(null),
-      thirdYear: new FormControl(null),
-      fourthYear: new FormControl(null),
-      fifthYear: new FormControl(null),
+      firstYear: new FormControl(null, [Validators.pattern("^[0-9]*$"), Validators.max(120)] ),
+      secondYear: new FormControl(null,[Validators.pattern("^[0-9]*$"),Validators.max(120)]),
+      thirdYear: new FormControl(null,[Validators.pattern("^[0-9]*$"),Validators.max(120)]),
+      fourthYear: new FormControl(null,[Validators.pattern("^[0-9]*$"),Validators.max(120)]),
+      fifthYear: new FormControl(null,[Validators.pattern("^[0-9]*$"),Validators.max(120)]),
   }, {validators:dateValidator})}
 
 
    onClickSubmit(){
     console.log(`in onclicksubmit method`);
-    // let strtDate = new Date(this.studentForm.get('startDate').value)
-    // let endDate = new Date(this.studentForm.get('lastDate').value)
-    // if(strtDate > endDate)
-    // {
-    //   this.isInvalidDateRange =  true;
-    // }
-    // else 
-    // {
-    // this.service.addStudentRecord(data).subscribe((result)=>{
-    // console.log(result);
-    
-    //   alert("Successfully added student record:  " + result.id+ " firstName: " + result.firstName  + "LastName:  " +result.lastName)
-   
-    // }
-  
-    // )
-  //}
-
     const model = this.getModel();
     this.service.addStudentRecord(model).subscribe({
-      next:(item) => this.onReset(),
-      //error:(err:HttpErrorResponse) => alert(err.message),
-      complete: () => this.alertify.success('Successfully added student record')
+      next: (response) => {
+        this.studentId = response.studentId;
+        this.onReset();
+        this.alertify.success(`Successfully added student record with ID: ${response.studentId}`);
+      }
     })
-  
 
 }
+
+
 
 getModel():StudentRecord
 {
@@ -138,7 +111,5 @@ getModel():StudentRecord
     return this.studentForm.controls['email'];
   }
 
-
-  
 
 }
